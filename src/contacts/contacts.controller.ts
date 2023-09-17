@@ -1,12 +1,23 @@
-import { Controller, Get, Post, Put, Delete, Body, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { CreateContactDto } from './dto/create-contact.dto';
-import { Request, Response } from 'express';
 @Controller('contacts')
 export class ContactsController {
   @Get()
-  findAll(@Req() req: Request, @Res() res: Response): Response {
-    console.log(req.url);
-    return res.send('Helo World!');
+  findAll(): string {
+    return 'Get all contacts';
+  }
+
+  @Get(':id')
+  findOne(@Param() param) {
+    return `Contact ${param.id}`;
   }
 
   @Post()
