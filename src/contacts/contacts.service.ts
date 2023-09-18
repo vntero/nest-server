@@ -1,28 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { Contact } from './interfaces/contact.interface';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class ContactsService {
-  private readonly contacts: Contact[] = [
-    {
-      id: '123',
-      name: 'Hugo',
-      phone: 920332560,
-      email: 'hugo@email.com',
-    },
-    {
-      id: '123456',
-      name: 'Hugo Two',
-      phone: 920123456,
-      email: 'two@email.com',
-    },
-  ];
+  constructor(
+    @InjectModel('Contact') private readonly contactModel: Model<Contact>,
+  ) {}
 
-  findAll(): Contact[] {
-    return this.contacts;
+  async findAll(): Promise<Contact[]> {
+    return await this.contactModel.find();
   }
 
-  findOne(id: string): Contact {
-    return this.contacts.find((contact) => contact.id === id);
+  async findOne(id: string): Promise<Contact> {
+    return await this.contactModel.findOne({ _id: id });
   }
 }
