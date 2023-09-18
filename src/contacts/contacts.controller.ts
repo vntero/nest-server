@@ -16,8 +16,8 @@ export class ContactsController {
   }
 
   @Get(':id')
-  findOne(@Param() param) {
-    return `Contact ${param.id}`;
+  findOne(@Param('id') id) {
+    return `Contact ${id}`;
   }
 
   @Post()
@@ -25,13 +25,16 @@ export class ContactsController {
     return `Name: ${createContactDto.name}, Phone: ${createContactDto.phone}, Email: ${createContactDto.email}`;
   }
 
-  @Put()
-  update(): string {
-    return 'Create Contact';
+  @Put(':id')
+  update(
+    @Body() updatedContactDto: CreateContactDto,
+    @Param(':id') id,
+  ): string {
+    return `Updated ${id} - Name: ${updatedContactDto.name}, Phone: ${updatedContactDto.phone}, Email: ${updatedContactDto.email}`;
   }
 
-  @Delete()
-  delete(): string {
-    return 'Create Contact';
+  @Delete(':id')
+  delete(@Param('id') id): string {
+    return `Deleted ${id}`;
   }
 }
