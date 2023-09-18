@@ -15,13 +15,13 @@ export class ContactsController {
   constructor(private readonly contactsService: ContactsService) {}
 
   @Get()
-  findAll(): Contact[] {
-    return this.contactsService.findAll();
+  async findAll(): Promise<Contact[]> {
+    return await this.contactsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): Contact {
-    return this.contactsService.findOne(id);
+  async findOne(@Param('id') id): Promise<Contact> {
+    return await this.contactsService.findOne(id);
   }
 
   @Post()
