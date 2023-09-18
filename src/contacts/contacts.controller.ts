@@ -15,12 +15,12 @@ export class ContactsController {
   constructor(private readonly contactsService: ContactsService) {}
 
   @Get()
-  findAll(): Promise<Contact[]> {
+  findAll(): Contact[] {
     return this.contactsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): Promise<Contact> {
+  findOne(@Param('id') id): Contact {
     return this.contactsService.findOne(id);
   }
 
