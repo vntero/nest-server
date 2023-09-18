@@ -8,11 +8,15 @@ import {
   Param,
 } from '@nestjs/common';
 import { CreateContactDto } from './dto/create-contact.dto';
+import { ContactsService } from './contacts.service';
+import { Contact } from './interfaces/contact.interface';
 @Controller('contacts')
 export class ContactsController {
+  constructor(private readonly contactsService: ContactsService) {}
+
   @Get()
-  findAll(): string {
-    return 'Get all contacts';
+  findAll(): Contact[] {
+    return this.contactsService.findAll();
   }
 
   @Get(':id')
