@@ -5,9 +5,10 @@ import { ContactsController } from './contacts/contacts.controller';
 import { ContactsService } from './contacts/contacts.service';
 import { ContactsModule } from './contacts/contacts.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import config from './config/keys';
 
 @Module({
-  imports: [ContactsModule, MongooseModule],
+  imports: [ContactsModule, MongooseModule.forRoot(config.mongoURI)],
   controllers: [AppController, ContactsController],
   providers: [AppService, ContactsService],
 })
