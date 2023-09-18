@@ -20,8 +20,8 @@ export class ContactsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id) {
-    return `Contact ${id}`;
+  findOne(@Param('id') id): Contact {
+    return this.contactsService.findOne(id);
   }
 
   @Post()

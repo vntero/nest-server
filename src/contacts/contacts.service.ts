@@ -21,4 +21,8 @@ export class ContactsService {
   findAll(): Contact[] {
     return this.contacts;
   }
+
+  findOne(id: string): Contact {
+    return this.contacts.find((contact) => contact.id === id);
+  }
 }
